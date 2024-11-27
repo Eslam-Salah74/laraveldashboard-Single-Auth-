@@ -29,9 +29,9 @@
                                                 <form method="POST" action="{{ route('login') }}">
                                                  @csrf
 													<div class="form-group">
-													<label>البريد الالكتروني</label>
-                                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                                     @error('email')
+														<label>البريد الإلكتروني أو رقم الهاتف</label>
+														<input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                                                     @error('login')
                                                      <span class="invalid-feedback" role="alert">
                                                      <strong>{{ $message }}</strong>
                                                      </span>
