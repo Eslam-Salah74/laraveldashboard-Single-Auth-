@@ -24,8 +24,12 @@ class LoginController extends Controller
         $request->validate([
             'login' => 'required|string',
             'password' => 'required|string',
+        ], [
+            'login.required' => 'يجب إدخال البريد الإلكتروني أو رقم الهاتف.',
+            'password.required' => 'يجب إدخال كلمة المرور.',
         ]);
     }
+
 
     protected function credentials(Request $request)
     {
