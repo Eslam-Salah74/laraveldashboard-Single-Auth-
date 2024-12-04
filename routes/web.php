@@ -28,6 +28,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::resource('sections',SectionController::class);
-    
+
 });
 Route::get('/{page}',[AdminController::class,'index']);
