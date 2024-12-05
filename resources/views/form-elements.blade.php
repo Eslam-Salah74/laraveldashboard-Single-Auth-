@@ -188,7 +188,7 @@
 											</div>
 										</div>
 										<div class="col-lg-6 mg-t-20 mg-lg-t-0">
-											<div class="form-group has-danger mg-b-0">
+											<div class="form-group has-dange mg-b-0">
 												<input class="form-control" placeholder="Input box (invalid state)" required="" type="text">
 												<textarea class="form-control mg-t-20" placeholder="Textarea (invalid state)" required="" rows="3"></textarea>
 											</div>

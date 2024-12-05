@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
- الاقسام
+الاقسام
 @stop
 @section('css')
 <!-- Internal Data table css -->
@@ -12,61 +12,105 @@
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">الاقسام</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/الاعدادات</span>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb -->
 @endsection
 @section('content')
 
-				<div class="row row-sm">
-                    <div class="col-xl-12">
-						<div class="card">
-							<div class="card-header pb-0">
-								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">SIMPLE TABLE</h4>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
-								</div>
-								<p class="tx-12 tx-gray-500 mb-2">Example of Valex Simple Table. <a href="">Learn more</a></p>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table text-md-nowrap" id="example1">
-										<thead>
-											<tr>
-												<th class="wd-15p border-bottom-0">First name</th>
-												<th class="wd-15p border-bottom-0">Last name</th>
-												<th class="wd-20p border-bottom-0">Position</th>
-												<th class="wd-15p border-bottom-0">Start date</th>
-												<th class="wd-10p border-bottom-0">Salary</th>
-												<th class="wd-25p border-bottom-0">E-mail</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Bella</td>
-												<td>Chloe</td>
-												<td>System Developer</td>
-												<td>2018/03/12</td>
-												<td>$654,765</td>
-												<td>b.Chloe@datatables.net</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+<div class="row row-sm">
 
-			</div>
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="col-sm-4 col-md-4">
 
-		</div>
+                    <div class="card-body">
+                        <a class="btn ripple btn-primary" data-target="#modaldemo8" data-toggle="modal" href="">اضافة قسم</a>
+                    </div>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table text-md-nowrap" id="example1">
+                        <thead>
+                            <tr>
+                                <th class="wd-15p border-bottom-0">#</th>
+                                <th class="wd-15p border-bottom-0">اسم القسم</th>
+                                <th class="wd-15p border-bottom-0"> اضيف بواسطة</th>
+                                <th class="wd-20p border-bottom-0">ملاحظات</th>
+                                <th class="wd-15p border-bottom-0">الاجرائات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $i=0 @endphp
+                            @foreach ($sections as $item)
+                                @php  $i++ @endphp
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td>{{@$item->section_name}}</td>
+                                    <td>{{@$item->description}}</td>
+                                    <td>{{@$item->created_by}}</td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal effects -->
+<div class="modal" id="modaldemo8">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">اضافة قسم </h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+
+                        <div class="card-body">
+                            <form action="{{route('sections.store')}}" method="POST" class="needs-validation was-validated">
+                                @csrf
+                                <div class="row row-sm">
+                                    <div class="col-lg-12">
+                                        {{-- has-dange & has-success --}}
+                                        <label for="">اسم القسم</label>
+                                        <div class="form-group mg-b-0">
+                                            <input class="form-control" name="section_name"  required="" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mg-b-0">
+                                            <label for="">الملاحظات</label>
+                                            <textarea class="form-control mg-t-20" name="description" required="" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn ripple btn-primary" type="button">تاكيد</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">اغلاق</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+</div>
 
 @endsection
 @section('js')
@@ -89,4 +133,6 @@
 <script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
+<!-- Internal Modal js-->
+<script src="{{URL::asset('assets/js/modal.js')}}"></script>
 @endsection
