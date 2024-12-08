@@ -37,28 +37,4 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 
-@if ($errors->any())
-    <script>
-        window.onload = function() {
-            @foreach ($errors->all() as $error)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: "{{ $error }}",
-                });
-            @endforeach
-        };
-    </script>
-@endif
 
-@if (session('success'))
-    <script>
-        window.onload = function() {
-            Swal.fire({
-                icon: 'success',
-                title: 'نجاح',
-                text: "{{ session('success') }}",
-            });
-        };
-    </script>
-@endif

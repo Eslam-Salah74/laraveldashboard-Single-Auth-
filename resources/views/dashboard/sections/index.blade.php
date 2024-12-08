@@ -26,6 +26,32 @@
 
 <div class="row row-sm">
 
+    @if ($errors->any())
+        <script>
+            window.onload = function() {
+                @foreach ($errors->all() as $error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: "{{ $error }}",
+                    });
+                @endforeach
+            };
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            window.onload = function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'نجاح',
+                    text: "{{ session('success') }}",
+                });
+            };
+        </script>
+    @endif
+
     <div class="col-xl-12">
         <div class="card">
             <div class="col-sm-4 col-md-4">

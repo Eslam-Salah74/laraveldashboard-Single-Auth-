@@ -6,6 +6,7 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreSectionRequest;
 
 class SectionController extends Controller
 {
@@ -23,27 +24,23 @@ class SectionController extends Controller
     }
 
 
-    public function store(Request $request)
-{
-    $inputs = $request->all();
+    public function store(StoreSectionRequest $request)
+    {
+        try {
+            Section::create([
+                'section_name' => $request->section_name,
+                'description'  => $request->description,
+                'created_by'   => Auth::user()->name,
+            ]);
 
-    // التحقق من وجود القسم مسبقًا
-    $check_input_exists = Section::where('section_name', '=', $inputs['section_name'])->exists();
+            session()->flash('success', 'تم إضافة القسم بنجاح.');
+            return redirect('sections');
+        } catch (\Exception $e) {
 
-    if ($check_input_exists) {
-        session()->flash('Error', 'خطأ! هذا القسم مسجل من قبل.');
-        return redirect('sections');
-    } else {
-        Section::create([
-            'section_name' => $request->section_name,
-            'description'  => $request->description,
-            'created_by'   => Auth::user()->name,
-        ]);
-
-        session()->flash('Add', 'تم إضافة القسم بنجاح.');
-        return redirect('sections');
+            session()->flash('Error', 'حدث خطأ أثناء إضافة القسم. حاول مرة أخرى.');
+            return redirect()->back()->withInput();
+        }
     }
-}
 
 
 
